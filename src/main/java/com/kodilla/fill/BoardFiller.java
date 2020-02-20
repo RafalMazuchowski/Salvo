@@ -7,24 +7,34 @@ import com.kodilla.fields.Field;
 public class BoardFiller implements Board {
     private Field[][] playerBoard;
     private Field[][] computerBoard;
+    private int horizontal = 10;
+    private int vertical = 10;
+
+    public int getHorizontal() {
+        return horizontal;
+    }
+
+    public int getVertical() {
+        return vertical;
+    }
 
     public Field[][] board (int horizontal, int vertical){
-        Field[][] newBoard = new Field[horizontal][vertical];
+        Field[][] clearBoard = new Field[horizontal][vertical];
         for (int i = 0; i < horizontal; i++){
             for (int j = 0; j < vertical; j++){
-                newBoard[i][j] = null;
+                clearBoard[i][j] = null;
                 }
             }
-        return newBoard;
+        return clearBoard;
     }
 
     public Field[][] fillPlayerBoards (){
-        playerBoard = board(10,10);
+        playerBoard = board(horizontal, vertical);
         return playerBoard;
     }
 
     public Field[][] fillComputerBoards (){
-        computerBoard = board(10,10);
+        computerBoard = board(horizontal, vertical);
         return computerBoard;
     }
 

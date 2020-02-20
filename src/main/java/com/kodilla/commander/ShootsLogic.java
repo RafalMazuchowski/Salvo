@@ -8,8 +8,8 @@ import com.kodilla.fill.BoardFiller;
 public class ShootsLogic {
     public Field[][] shootValidator (Field[][] tempBoard, Field move){
         ShootField shoot = new ShootField();
-        int x = move.getIdX();
-        int y = move.getIdY();
+        int x = move.getIdX() - 1;
+        int y = move.getIdY() - 1;
 
         if (tempBoard[x][y] == null){
             shoot.setHit(false);

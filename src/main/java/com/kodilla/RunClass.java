@@ -8,6 +8,7 @@ public class RunClass {
     public static void main(String[] args) {
 
     }
+    /*rozważania
         Field[][] playerField;
 
         public void setNewField(Field[][] playerField) {
@@ -18,5 +19,5 @@ public class RunClass {
             Field asdasd = playerField[0][0];
             asdasd.emptyField();
         }
-
+*/
 }
