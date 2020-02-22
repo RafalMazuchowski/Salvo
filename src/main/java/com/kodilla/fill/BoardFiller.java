@@ -7,8 +7,8 @@ import com.kodilla.fields.Field;
 public class BoardFiller implements Board {
     private Field[][] playerBoard;
     private Field[][] computerBoard;
-    private int horizontal = 10;
-    private int vertical = 10;
+    private int horizontal;
+    private int vertical;
 
     public int getHorizontal() {
         return horizontal;
