@@ -1,6 +1,7 @@
 package com.kodilla.GUI;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class MajorControl extends Application {
@@ -12,21 +13,15 @@ public class MajorControl extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            Game gameScene = new Game();
-            ConfigWindow configWindow = new ConfigWindow();
+            Settings settings = new Settings();
+            Scene configWindow = settings.configWindow(primaryStage);
             primaryStage.setTitle("Salvo");
-            primaryStage.setScene(configWindow.start());
-            primaryStage.setMinWidth(800);
-            primaryStage.setMinHeight(500);
-            primaryStage.show();
-            primaryStage.setScene(gameScene.start());
+            primaryStage.setScene(configWindow);
+            primaryStage.setMinWidth(270);
+            primaryStage.setMinHeight(150);
             primaryStage.show();
         } catch (Exception e) {
-
             System.out.println(e.getMessage());
         }
     }
 }
-
-
-

@@ -10,7 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class Game {
-    private Board boardGUI = new Board();
+    private DisplayedBoard boardGUI = new DisplayedBoard();
     public Scene start(){
             HBox box = new HBox();
             Pane titlePane = new Pane();

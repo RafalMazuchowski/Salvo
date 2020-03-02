@@ -3,7 +3,6 @@ package com.kodilla.commander;
 import com.kodilla.fields.Field;
 import com.kodilla.fields.ShipField;
 import com.kodilla.fields.ShootField;
-import com.kodilla.fill.BoardFiller;
 
 public class ShootsLogic {
     public Field[][] shootValidator (Field[][] tempBoard, Field move){

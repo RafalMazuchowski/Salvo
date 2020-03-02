@@ -1,14 +1,15 @@
 package com.kodilla.fill;
 
+import com.kodilla.container.BoardContainer;
 import com.kodilla.fields.ShipSize;
 
 import java.util.LinkedList;
 
 public class FillCriterion {
-    BoardFiller boardFiller = new BoardFiller();
-    int shipCounts; // total ships counts - only in non-custom mode
+    BoardContainer boardContainer = new BoardContainer();
+    int shipCounts;                                         // total ships counts - only in non-custom mode
     int fleetSize;
-    int freeSea = boardFiller.getHorizontal() * boardFiller.getVertical();
+    int freeSea = boardContainer.getHorizontal() * boardContainer.getVertical();
     LinkedList<ShipSize> fleet = new LinkedList<ShipSize>();
 
     public int occupiedFleetSpace (ShipSize ship){
