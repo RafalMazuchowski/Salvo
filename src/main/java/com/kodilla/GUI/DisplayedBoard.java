@@ -1,4 +1,5 @@
 package com.kodilla.GUI;
+
 import com.kodilla.container.BoardContainer;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -9,7 +10,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 
 public class DisplayedBoard {
-    private BoardContainer boardContainer = new BoardContainer();
+    private BoardContainer boardContainer = new BoardContainer(); // przekazać Board contenera
     private int horizontal = boardContainer.getHorizontal();
     private int vertical = boardContainer.getVertical();
 
@@ -32,25 +33,32 @@ public class DisplayedBoard {
 
     private void createButton(GridPane grid, int i) {
         Button button = createButton();
+        Button defButton = createButton();
         int x = i % horizontal + 1;
         int y = i / horizontal + 1;
         button.setOnAction(e -> {
             System.out.println(x + "x" + y);
-            button.setStyle("-fx-background-color: rgba(20,81,188,0.71); " +
-                    "-fx-border-color: #000000; -fx-border-width: 1px;");
-            boardContainer.addShip(boardContainer.getPlayerBoard(), x , y);
+            if (boardContainer.getPlayerBoard()[x - 1][y - 1] == null) {
+                button.setStyle("-fx-background-color: rgba(20,81,188,0.71); " +
+                        "-fx-border-color: #000000; -fx-border-width: 1px;");
+                System.out.println("Oj");
+            } else {
+                button.setStyle(null);
+                System.out.println("Trolololololo");
+            }
+            boardContainer.addShip(boardContainer.getPlayerBoard(), x, y);
         });
         grid.add(button, i % horizontal + 1, i / horizontal + 1);
     }
 
     private GridPane frame(GridPane grid) {
-        for (int x = 1; !(x > horizontal); x++){
+        for (int x = 1; !(x > horizontal); x++) {
             Label label = createLabel(String.valueOf(x));
             grid.add(label, x, 0);
         }
 
         char a = 'A';
-        for (int y = 1; !(y > vertical); y++, a++){
+        for (int y = 1; !(y > vertical); y++, a++) {
             if (a == '`') a = 'a';
             Label label = createLabel(String.valueOf(a));
             grid.add(label, 0, y);

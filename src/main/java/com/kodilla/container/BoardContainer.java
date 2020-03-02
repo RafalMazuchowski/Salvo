@@ -4,10 +4,12 @@ import com.kodilla.commander.ShootsLogic;
 import com.kodilla.fields.Field;
 import com.kodilla.fields.ShipField;
 
+import javax.swing.plaf.PanelUI;
+
 public class BoardContainer {
     private int horizontal = 10;
     private int vertical = 10;
-    private Field[][] playerBoard;
+    private Field[][] playerBoard = new Field[10][10];
     private Field[][] computerBoard;
 
     public Field[][] getPlayerBoard() {
@@ -20,13 +22,16 @@ public class BoardContainer {
 
     public Field[][] addShip (Field[][] tempField, int x, int y){
         ShipField shipField = new ShipField();
-        if (tempField[x][y] == null){
+        if (tempField[x - 1][y - 1] == null){
+            System.out.println("ship");
             shipField.emptyField();
-            tempField[x][y] = shipField;
+            tempField[x - 1][y - 1] = shipField;
+        } else {
+            tempField[x - 1][y - 1] = null;
+            System.out.println("null");
         }
         return tempField;
     }
-
     public Field[][] setNewFieldAtPlayerField(Field move) {
         ShootsLogic playerShootLogic = new ShootsLogic();
         playerShootLogic.shootValidator(playerBoard, move);
