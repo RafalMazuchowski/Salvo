@@ -11,11 +11,11 @@ public class MajorControl extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         try {
             Settings settings = new Settings();
             Scene configWindow = settings.configWindow(primaryStage);
-            primaryStage.setTitle("Salvo");
+            primaryStage.setTitle("SEA BATTLE");
             primaryStage.setScene(configWindow);
             primaryStage.setMinWidth(270);
             primaryStage.setMinHeight(150);

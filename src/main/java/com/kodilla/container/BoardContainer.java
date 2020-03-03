@@ -12,6 +12,9 @@ public class BoardContainer {
     private Field[][] playerBoard = new Field[10][10];
     private Field[][] computerBoard;
 
+    public BoardContainer() {
+    }
+
     public Field[][] getPlayerBoard() {
         return playerBoard;
     }

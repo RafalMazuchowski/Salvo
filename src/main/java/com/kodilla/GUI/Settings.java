@@ -43,10 +43,10 @@ public class Settings {
             boardContainer.setHorizontal(Integer.parseInt(xField.getText()));
             boardContainer.setVertical(Integer.parseInt(yField.getText()));
             primaryStage.setScene(gameScene.start());
-            primaryStage.setX(50);
+            primaryStage.setX(200);
             primaryStage.setY(50);
-            primaryStage.setMinWidth(800);
-            primaryStage.setMinHeight(500);}
+            primaryStage.setMinWidth(650);
+            primaryStage.setMinHeight(550);}
         );
 
 

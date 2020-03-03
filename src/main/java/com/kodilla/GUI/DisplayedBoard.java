@@ -33,18 +33,17 @@ public class DisplayedBoard {
 
     private void createButton(GridPane grid, int i) {
         Button button = createButton();
-        Button defButton = createButton();
         int x = i % horizontal + 1;
         int y = i / horizontal + 1;
         button.setOnAction(e -> {
             System.out.println(x + "x" + y);
             if (boardContainer.getPlayerBoard()[x - 1][y - 1] == null) {
-                button.setStyle("-fx-background-color: rgba(20,81,188,0.71); " +
+                button.setStyle("-fx-background-color: rgb(0,26,255); " +
                         "-fx-border-color: #000000; -fx-border-width: 1px;");
-                System.out.println("Oj");
+                System.out.println("Marked");
             } else {
                 button.setStyle(null);
-                System.out.println("Trolololololo");
+                System.out.println("Unmarked");
             }
             boardContainer.addShip(boardContainer.getPlayerBoard(), x, y);
         });
