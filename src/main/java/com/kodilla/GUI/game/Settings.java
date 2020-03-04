@@ -1,8 +1,7 @@
-package com.kodilla.GUI;
+package com.kodilla.GUI.game;
 
 import com.kodilla.container.BoardContainer;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

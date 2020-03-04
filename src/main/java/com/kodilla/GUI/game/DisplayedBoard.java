@@ -1,6 +1,7 @@
-package com.kodilla.GUI;
+package com.kodilla.GUI.game;
 
 import com.kodilla.container.BoardContainer;
+import com.kodilla.container.ShipContainer;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,6 +14,7 @@ public class DisplayedBoard {
     private BoardContainer boardContainer = new BoardContainer(); // przekazać Board contenera
     private int horizontal = boardContainer.getHorizontal();
     private int vertical = boardContainer.getVertical();
+    private ShipContainer shipContainer = new ShipContainer();
 
     public GridPane getBoard(boolean buttons) {
         GridPane grid = new GridPane();
@@ -40,9 +42,13 @@ public class DisplayedBoard {
             if (boardContainer.getPlayerBoard()[x - 1][y - 1] == null) {
                 button.setStyle("-fx-background-color: rgb(0,26,255); " +
                         "-fx-border-color: #000000; -fx-border-width: 1px;");
+                shipContainer.setShipCounts(shipContainer.getShipCounts() + 1);
+                System.out.println("Ships: " + shipContainer.getShipCounts());
                 System.out.println("Marked");
             } else {
                 button.setStyle(null);
+                shipContainer.setShipCounts(shipContainer.getShipCounts() - 1);
+                System.out.println("Ships: " + shipContainer.getShipCounts());
                 System.out.println("Unmarked");
             }
             boardContainer.addShip(boardContainer.getPlayerBoard(), x, y);
