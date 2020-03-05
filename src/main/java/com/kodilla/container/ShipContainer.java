@@ -1,7 +1,11 @@
 package com.kodilla.container;
 
 public class ShipContainer {
-    private int shipCounts = 0;
+    public int shipCounts;
+
+    public ShipContainer(int shipCounts) {
+        this.shipCounts = shipCounts;
+    }
 
     public int getShipCounts() {
         return shipCounts;

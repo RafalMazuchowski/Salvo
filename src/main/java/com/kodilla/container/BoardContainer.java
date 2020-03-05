@@ -4,11 +4,10 @@ import com.kodilla.commander.ShootsLogic;
 import com.kodilla.fields.Field;
 import com.kodilla.fields.ShipField;
 
-import javax.swing.plaf.PanelUI;
-
 public class BoardContainer {
-    private int horizontal = 10;
-    private int vertical = 10;
+
+    private static int horizontal = 10;
+    private static int vertical = 10;
     private Field[][] playerBoard = new Field[10][10];
     private Field[][] computerBoard;
 
@@ -47,11 +46,11 @@ public class BoardContainer {
         return computerBoard;
     }
 
-    public int getHorizontal() {
+    public static int getHorizontal() {
         return horizontal;
     }
 
-    public int getVertical() {
+    public static int getVertical() {
         return vertical;
     }
 

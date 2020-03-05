@@ -11,10 +11,11 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 
 public class DisplayedBoard {
-    private BoardContainer boardContainer = new BoardContainer(); // przekazać Board contenera
-    private int horizontal = boardContainer.getHorizontal();
-    private int vertical = boardContainer.getVertical();
-    private ShipContainer shipContainer = new ShipContainer();
+    private BoardContainer boardContainer = new BoardContainer();
+    private int horizontal = BoardContainer.getHorizontal();
+    private int vertical = BoardContainer.getVertical();
+    private int count = 1;
+    private ShipContainer shipContainer = new ShipContainer(count);
 
     public GridPane getBoard(boolean buttons) {
         GridPane grid = new GridPane();
@@ -42,13 +43,13 @@ public class DisplayedBoard {
             if (boardContainer.getPlayerBoard()[x - 1][y - 1] == null) {
                 button.setStyle("-fx-background-color: rgb(0,26,255); " +
                         "-fx-border-color: #000000; -fx-border-width: 1px;");
-                shipContainer.setShipCounts(shipContainer.getShipCounts() + 1);
-                System.out.println("Ships: " + shipContainer.getShipCounts());
+                shipContainer.setShipCounts(shipContainer.shipCounts + 1);
+                System.out.println("Ships: " + shipContainer.shipCounts + " & count: " + count);
                 System.out.println("Marked");
             } else {
                 button.setStyle(null);
-                shipContainer.setShipCounts(shipContainer.getShipCounts() - 1);
-                System.out.println("Ships: " + shipContainer.getShipCounts());
+                shipContainer.setShipCounts(shipContainer.shipCounts - 1);
+                System.out.println("Ships: " + shipContainer.shipCounts + " & count: " + count);
                 System.out.println("Unmarked");
             }
             boardContainer.addShip(boardContainer.getPlayerBoard(), x, y);

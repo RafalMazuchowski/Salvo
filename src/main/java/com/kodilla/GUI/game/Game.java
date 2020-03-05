@@ -16,6 +16,8 @@ public class Game {
     private Image imageback = new Image("textures/background.png");
     private Image title = new Image("textures/seaBattle.jpg");
     private DisplayedBoard boardGUI = new DisplayedBoard();
+    int count;
+    private ShipContainer shipContainer = new ShipContainer(count);
 
     public Scene start() {
         HBox box = new HBox();
@@ -76,7 +78,6 @@ public class Game {
     }
 
     private GridPane getScoreGrid() {
-        ShipContainer shipContainer = new ShipContainer();
         GridPane scorePane = new GridPane();
         scorePane.setAlignment(Pos.CENTER);
         scorePane.setStyle("-fx-background-color: #0089b3;" +
