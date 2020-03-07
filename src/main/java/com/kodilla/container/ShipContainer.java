@@ -3,8 +3,8 @@ package com.kodilla.container;
 public class ShipContainer {
     public int shipCounts;
 
-    public ShipContainer(int shipCounts) {
-        this.shipCounts = shipCounts;
+    public ShipContainer() {
+        this.shipCounts = 0;
     }
 
     public int getShipCounts() {
