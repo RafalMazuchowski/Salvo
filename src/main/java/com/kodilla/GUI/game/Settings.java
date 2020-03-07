@@ -48,7 +48,6 @@ public class Settings {
             primaryStage.setMinHeight(550);}
         );
 
-
         col.getChildren().addAll(xLabel, xField);
         col.setAlignment(Pos.CENTER);
         row.getChildren().addAll(yLabel, yField);
@@ -72,5 +71,4 @@ public class Settings {
             }
         });
     }
-
 }

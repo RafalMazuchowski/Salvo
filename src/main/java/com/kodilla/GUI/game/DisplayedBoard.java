@@ -14,10 +14,12 @@ public class DisplayedBoard {
     private BoardContainer boardContainer = new BoardContainer();
     private int horizontal = BoardContainer.getHorizontal();
     private int vertical = BoardContainer.getVertical();
-    private int count = 1;
-    private ShipContainer shipContainer = new ShipContainer(count);
+    private ShipContainer shipContainer;
+    private IRefreshed iRefreshed;
 
-    public GridPane getBoard(boolean buttons) {
+    public GridPane getBoard(boolean buttons, ShipContainer shipContainer, IRefreshed iRefreshed) {
+        this.shipContainer = shipContainer;
+        this.iRefreshed = iRefreshed;
         GridPane grid = new GridPane();
         rowsAndColumns(grid);
 
@@ -44,14 +46,15 @@ public class DisplayedBoard {
                 button.setStyle("-fx-background-color: rgb(0,26,255); " +
                         "-fx-border-color: #000000; -fx-border-width: 1px;");
                 shipContainer.setShipCounts(shipContainer.shipCounts + 1);
-                System.out.println("Ships: " + shipContainer.shipCounts + " & count: " + count);
+                System.out.println("Ships: " + shipContainer.shipCounts);
                 System.out.println("Marked");
             } else {
                 button.setStyle(null);
                 shipContainer.setShipCounts(shipContainer.shipCounts - 1);
-                System.out.println("Ships: " + shipContainer.shipCounts + " & count: " + count);
+                System.out.println("Ships: " + shipContainer.shipCounts);
                 System.out.println("Unmarked");
             }
+            iRefreshed.refreshScore();
             boardContainer.addShip(boardContainer.getPlayerBoard(), x, y);
         });
         grid.add(button, i % horizontal + 1, i / horizontal + 1);

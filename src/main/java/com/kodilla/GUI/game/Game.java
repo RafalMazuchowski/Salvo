@@ -11,13 +11,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
-public class Game {
+public class Game implements IRefreshed{
 
     private Image imageback = new Image("textures/background.png");
     private Image title = new Image("textures/seaBattle.jpg");
-    private DisplayedBoard boardGUI = new DisplayedBoard();
-    int count;
-    private ShipContainer shipContainer = new ShipContainer(count);
+    private DisplayedBoard displayedBoard = new DisplayedBoard();
+    private ShipContainer shipContainer = new ShipContainer();
+
+    private Label shipLabel;
+    private Button startGameButton;
 
     public Scene start() {
         HBox box = new HBox();
@@ -63,7 +65,7 @@ public class Game {
         mainGrid.setPadding(new Insets(11.5, 12.5, 13.5, 14.5));
         mainGrid.setHgap(5.5);
         mainGrid.setVgap(5.5);
-        mainGrid.getChildren().add(boardGUI.getBoard(true));
+        mainGrid.getChildren().add(displayedBoard.getBoard(true, shipContainer, this));
         return mainGrid;
     }
 
@@ -73,7 +75,7 @@ public class Game {
         childGrid.setPadding(new Insets(20.5, 20.5, 20.5, 20.5));
         childGrid.setHgap(5.5);
         childGrid.setVgap(5.5);
-        childGrid.getChildren().add(boardGUI.getBoard(false));
+        childGrid.getChildren().add(displayedBoard.getBoard(false, shipContainer, this));
         return childGrid;
     }
 
@@ -82,14 +84,20 @@ public class Game {
         scorePane.setAlignment(Pos.CENTER);
         scorePane.setStyle("-fx-background-color: #0089b3;" +
                 "-fx-border-color: #ffffff;");
-        Label shipLabel = new Label(shipContainer.getShipCounts() + " / 3");
+        shipLabel = new Label(shipContainer.getShipCounts() + " / 3");
         Label shipQty = new Label("SHIPS: ");
-        Button startGameButton = new Button("START");
-        startGameButton.setDisable(shipContainer.getShipCounts() != 3);
+        startGameButton = new Button("START");
+        startGameButton.setDisable(true);
         scorePane.setPrefSize(70, 50);
         scorePane.add(shipQty, 0, 0);
         scorePane.add(shipLabel, 2, 0);
         scorePane.add(startGameButton, 1, 2);
         return scorePane;
+    }
+
+    @Override
+    public void refreshScore() {
+        shipLabel.setText(shipContainer.getShipCounts() + " / 3");
+        startGameButton.setDisable(shipContainer.getShipCounts() != 3);
     }
 }
