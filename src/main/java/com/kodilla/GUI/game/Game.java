@@ -15,13 +15,14 @@ public class Game implements IRefreshed{
 
     private Image imageback = new Image("textures/background.png");
     private Image title = new Image("textures/seaBattle.jpg");
-    private DisplayedBoard displayedBoard = new DisplayedBoard();
+    private DisplayedBoard displayedBoard;
     private ShipContainer shipContainer = new ShipContainer();
 
     private Label shipLabel;
     private Button startGameButton;
 
     public Scene start() {
+        displayedBoard = new DisplayedBoard();
         HBox box = new HBox();
         VBox rightBox = new VBox();
         VBox leftBox = new VBox();
@@ -45,8 +46,7 @@ public class Game implements IRefreshed{
         box.getChildren().addAll(leftBox, rightBox);
         box.setBackground(background);
 
-        Scene scene = new Scene(box, 650, 550, Color.STEELBLUE);
-
+        Scene scene = new Scene(box, Color.STEELBLUE);
         return scene;
     }
 
@@ -81,10 +81,11 @@ public class Game implements IRefreshed{
 
     private GridPane getScoreGrid() {
         GridPane scorePane = new GridPane();
+        Settings settings = new Settings();
         scorePane.setAlignment(Pos.CENTER);
         scorePane.setStyle("-fx-background-color: #0089b3;" +
                 "-fx-border-color: #ffffff;");
-        shipLabel = new Label(shipContainer.getShipCounts() + " / 3");
+        shipLabel = new Label(shipContainer.getShipCounts() + "/" + settings.getSliderValue());
         Label shipQty = new Label("SHIPS: ");
         startGameButton = new Button("START");
         startGameButton.setDisable(true);
@@ -97,7 +98,8 @@ public class Game implements IRefreshed{
 
     @Override
     public void refreshScore() {
-        shipLabel.setText(shipContainer.getShipCounts() + " / 3");
+        Settings settings = new Settings();
+        shipLabel.setText(shipContainer.getShipCounts() + "/" + settings.getSliderValue());
         startGameButton.setDisable(shipContainer.getShipCounts() != 3);
     }
 }

@@ -68,7 +68,7 @@ public class DisplayedBoard {
 
         char a = 'A';
         for (int y = 1; !(y > vertical); y++, a++) {
-            if (a == '`') a = 'a';
+            if (a == '[') a = 'a';
             Label label = createLabel(String.valueOf(a));
             grid.add(label, 0, y);
         }

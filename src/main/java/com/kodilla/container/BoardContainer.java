@@ -8,8 +8,8 @@ public class BoardContainer {
 
     private static int horizontal = 10;
     private static int vertical = 10;
-    private Field[][] playerBoard = new Field[10][10];
-    private Field[][] computerBoard;
+    private Field[][] playerBoard = new Field[BoardContainer.horizontal][BoardContainer.vertical];
+    private Field[][] computerBoard = new Field[BoardContainer.horizontal][BoardContainer.vertical];
 
     public BoardContainer() {
     }
@@ -54,13 +54,16 @@ public class BoardContainer {
         return vertical;
     }
 
-    public void setHorizontal(int horizontal) {
-        this.horizontal = horizontal;
+    public void setSize(int horizontal, int vertical) {
+        BoardContainer.horizontal = horizontal;
+        BoardContainer.vertical = vertical;
+        //playerBoard = new Field[BoardContainer.horizontal][BoardContainer.vertical];
     }
-
+/*
     public void setVertical(int vertical) {
-        this.vertical = vertical;
-    }
+        BoardContainer.vertical = vertical;
+        //playerBoard = new Field[BoardContainer.horizontal][BoardContainer.vertical];
+    }*/
 
     // wypełnia BOARD zgodnie z kryteriami FillCriterion
 }
