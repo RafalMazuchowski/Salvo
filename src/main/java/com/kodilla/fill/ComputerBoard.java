@@ -13,7 +13,7 @@ public class ComputerBoard {
 
     public Field[][] fillComputerBoard(Field[][] computerBoard){
         int x, y;
-        int computerShips = (BoardContainer.getHorizontal() * BoardContainer.getVertical()) / 3;
+        int computerShips = (BoardContainer.getHorizontal() * BoardContainer.getVertical()) / 5;
         while (computerShips == existingShips) {
 
             do {

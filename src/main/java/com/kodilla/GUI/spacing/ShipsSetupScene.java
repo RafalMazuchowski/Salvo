@@ -12,7 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
-public class Game implements IRefreshed{
+public class ShipsSetupScene implements IRefreshed{
 
     private Image imageback = new Image("textures/background.png");
     private Image title = new Image("textures/seaBattle.jpg");

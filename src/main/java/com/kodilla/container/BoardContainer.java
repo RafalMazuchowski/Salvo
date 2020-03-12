@@ -55,7 +55,7 @@ public class BoardContainer {
     }
 
     public static int getShipsCount(){
-        return (horizontal * vertical) / 3;
+        return (horizontal * vertical) / 5;
     }
 
     public void setSize(int horizontal, int vertical) {

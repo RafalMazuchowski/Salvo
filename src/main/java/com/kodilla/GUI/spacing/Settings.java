@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 public class Settings {
     public Scene configWindow(Stage primaryStage) {
         BoardContainer boardContainer = new BoardContainer();
-        Game gameScene = new Game();
+        ShipsSetupScene shipsSetupScene = new ShipsSetupScene();
         VBox vBox = new VBox();
         HBox col = new HBox(), row = new HBox();
         Label empty = new Label();
@@ -63,7 +63,7 @@ public class Settings {
 
         okButton.setOnAction(e -> {
                     boardContainer.setSize(Integer.parseInt(xField.getText()), Integer.parseInt(yField.getText()));
-                    primaryStage.setScene(gameScene.start());
+                    primaryStage.setScene(shipsSetupScene.start());
                     primaryStage.setX(200);
                     primaryStage.setY(50);
                     primaryStage.setMinWidth(650);
