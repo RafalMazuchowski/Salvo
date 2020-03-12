@@ -1,4 +1,4 @@
-package com.kodilla.GUI.game;
+package com.kodilla.GUI.spacing;
 
 import com.kodilla.container.BoardContainer;
 import com.kodilla.container.ShipContainer;

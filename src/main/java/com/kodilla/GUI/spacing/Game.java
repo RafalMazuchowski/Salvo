@@ -1,5 +1,6 @@
-package com.kodilla.GUI.game;
+package com.kodilla.GUI.spacing;
 
+import com.kodilla.container.BoardContainer;
 import com.kodilla.container.ShipContainer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -85,7 +86,7 @@ public class Game implements IRefreshed{
         scorePane.setAlignment(Pos.CENTER);
         scorePane.setStyle("-fx-background-color: #0089b3;" +
                 "-fx-border-color: #ffffff;");
-        shipLabel = new Label(shipContainer.getShipCounts() + "/" + settings.getSliderValue());
+        shipLabel = new Label(shipContainer.getShipCounts() + "/" + BoardContainer.getShipsCount());
         Label shipQty = new Label("SHIPS: ");
         startGameButton = new Button("START");
         startGameButton.setDisable(true);
@@ -98,8 +99,7 @@ public class Game implements IRefreshed{
 
     @Override
     public void refreshScore() {
-        Settings settings = new Settings();
-        shipLabel.setText(shipContainer.getShipCounts() + "/" + settings.getSliderValue());
-        startGameButton.setDisable(shipContainer.getShipCounts() != 3);
+        shipLabel.setText(shipContainer.getShipCounts() + "/" + BoardContainer.getShipsCount());
+        startGameButton.setDisable(shipContainer.getShipCounts() != BoardContainer.getShipsCount());
     }
 }

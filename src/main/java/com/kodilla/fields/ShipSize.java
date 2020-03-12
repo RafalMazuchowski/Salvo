@@ -1,5 +1,8 @@
 package com.kodilla.fields;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
+
+@Ignore
 public enum ShipSize {
 
     ONECELLSHIP (1),

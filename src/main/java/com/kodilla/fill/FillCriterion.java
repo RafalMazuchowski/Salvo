@@ -2,9 +2,11 @@ package com.kodilla.fill;
 
 import com.kodilla.container.BoardContainer;
 import com.kodilla.fields.ShipSize;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 
 import java.util.LinkedList;
 
+@Ignore
 public class FillCriterion {
     BoardContainer boardContainer = new BoardContainer();
     int shipCounts;                                         // total ships counts - only in non-custom mode

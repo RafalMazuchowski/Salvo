@@ -1,25 +1,28 @@
 package com.kodilla.fill;
 
 import com.kodilla.container.BoardContainer;
+import com.kodilla.container.ShipContainer;
 import com.kodilla.fields.Field;
 
 import java.util.Random;
 
 public class ComputerBoard {
-    private BoardContainer boardContainer = new BoardContainer();
     private Random random = new Random();
+    private BoardContainer boardContainer = new BoardContainer();
+    private int existingShips;
 
-    public Field[][] fillComputerBoard(int i){
+    public Field[][] fillComputerBoard(Field[][] computerBoard){
         int x, y;
-        i = 20;
-        Field[][] computerBoard = boardContainer.getComputerBoard();
-        while (i == 0) {
+        int computerShips = (BoardContainer.getHorizontal() * BoardContainer.getVertical()) / 3;
+        while (computerShips == existingShips) {
+
             do {
                 x = random.nextInt(BoardContainer.getHorizontal());
                 y = random.nextInt(BoardContainer.getVertical());
             } while (computerBoard[x][y] == null);
+
             boardContainer.addShip(boardContainer.getComputerBoard(), x, y);
-            i--;
+            computerShips--;
         }
             return computerBoard;
     }

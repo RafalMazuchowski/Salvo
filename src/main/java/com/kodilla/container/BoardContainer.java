@@ -54,6 +54,10 @@ public class BoardContainer {
         return vertical;
     }
 
+    public static int getShipsCount(){
+        return (horizontal * vertical) / 3;
+    }
+
     public void setSize(int horizontal, int vertical) {
         BoardContainer.horizontal = horizontal;
         BoardContainer.vertical = vertical;
