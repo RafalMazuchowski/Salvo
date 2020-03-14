@@ -1,7 +1,8 @@
-package com.kodilla.GUI.spacing;
+package com.kodilla.GUI.main;
 
 import com.kodilla.container.BoardContainer;
 import com.kodilla.container.ShipContainer;
+import com.kodilla.fields.Field;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,33 +17,55 @@ public class DisplayedBoard {
     private int vertical = BoardContainer.getVertical();
     private ShipContainer shipContainer;
     private IRefreshed iRefreshed;
+    private Label[][] labels;
 
-    public GridPane getBoard(boolean buttons, ShipContainer shipContainer, IRefreshed iRefreshed) {
+    public BoardContainer getBoardContainer() {
+        return boardContainer;
+    }
+
+    public GridPane getBoard(boolean buttons, boolean game, ShipContainer shipContainer, IRefreshed iRefreshed) {
         this.shipContainer = shipContainer;
         this.iRefreshed = iRefreshed;
         GridPane grid = new GridPane();
         rowsAndColumns(grid);
+        labels = new Label[horizontal][vertical];
+        System.out.println("Generating board...");
 
         for (int i = 0; i < vertical * horizontal; i++) {
-            if (buttons) {
-                createButton(grid, i);
+            if (!game) {
+                if (buttons) {
+                    placingButton(grid, i);
+                } else {
+                    Label label = createLabel("");
+                    labels[i % horizontal][i / horizontal] = label;
+                    grid.add(label, i % horizontal + 1, i / horizontal + 1);
+                }
+                System.out.println(i + ": " + (i / horizontal + 1) + ", " + ((i % horizontal) + 1));
             } else {
-                Label label = createLabel("");
-                grid.add(label, i % horizontal + 1, i / horizontal + 1);
+                clashButton(grid, i);
             }
-            System.out.println(i + ": " + (i / horizontal + 1) + ", " + ((i % horizontal) + 1));
         }
-
         return frame(grid);
     }
 
-    private void createButton(GridPane grid, int i) {
+    public void updateLabels(Field[][] board) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] != null) {
+                    labels[i][j].setStyle("-fx-background-color: rgb(0,26,255); " +
+                            "-fx-border-color: #343434; -fx-border-width: 1px;");
+                }
+            }
+        }
+    }
+
+    private void placingButton(GridPane grid, int i) {
         Button button = createButton();
         int x = i % horizontal + 1;
         int y = i / horizontal + 1;
         button.setOnAction(e -> {
             System.out.println(x + "x" + y);
-            if (boardContainer.getPlayerBoard()[x - 1][y - 1] == null) {
+            if (BoardContainer.getPlayerBoard()[x - 1][y - 1] == null) {
                 button.setStyle("-fx-background-color: rgb(0,26,255); " +
                         "-fx-border-color: #000000; -fx-border-width: 1px;");
                 shipContainer.setShipCounts(shipContainer.shipCounts + 1);
@@ -55,7 +78,32 @@ public class DisplayedBoard {
                 System.out.println("Unmarked");
             }
             iRefreshed.refreshScore();
-            boardContainer.addShip(boardContainer.getPlayerBoard(), x, y);
+            boardContainer.addShip(BoardContainer.getPlayerBoard(), x, y);
+        });
+        grid.add(button, i % horizontal + 1, i / horizontal + 1);
+    }
+
+    private void clashButton(GridPane grid, int i) {
+        Button button = createButton();
+        int x = i % horizontal + 1;
+        int y = i / horizontal + 1;
+        button.setOnAction(e -> {
+            System.out.println(x + "x" + y);
+            if (BoardContainer.getComputerBoard()[x - 1][y - 1] == null) {
+                button.setStyle("-fx-background-color: rgb(75,75,75); " +
+                        "-fx-border-color: rgb(52,52,52); -fx-border-width: 1px;");
+                System.out.println("Ships: " + shipContainer.shipCounts);
+                System.out.println("MISS");
+            } else {
+                button.setStyle("-fx-background-color: rgb(225,38,0); " +
+                        "-fx-border-color: #000000; -fx-border-width: 1px;");
+                shipContainer.setShipCounts(shipContainer.shipCounts + 1);
+                System.out.println("Ships: " + shipContainer.shipCounts);
+                System.out.println("HIT!");
+            }
+            button.setDisable(true);
+            button.setOpacity(80.0);
+            iRefreshed.refreshScore();
         });
         grid.add(button, i % horizontal + 1, i / horizontal + 1);
     }

@@ -1,4 +1,4 @@
-package com.kodilla.GUI.spacing;
+package com.kodilla.GUI.main;
 
 public interface IRefreshed {
      void refreshScore ();

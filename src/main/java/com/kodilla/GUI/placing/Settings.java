@@ -1,4 +1,4 @@
-package com.kodilla.GUI.spacing;
+package com.kodilla.GUI.placing;
 
 import com.kodilla.container.BoardContainer;
 import javafx.geometry.Pos;
@@ -63,7 +63,7 @@ public class Settings {
 
         okButton.setOnAction(e -> {
                     boardContainer.setSize(Integer.parseInt(xField.getText()), Integer.parseInt(yField.getText()));
-                    primaryStage.setScene(shipsSetupScene.start());
+                    primaryStage.setScene(shipsSetupScene.start(primaryStage));
                     primaryStage.setX(200);
                     primaryStage.setY(50);
                     primaryStage.setMinWidth(650);
@@ -94,7 +94,7 @@ public class Settings {
         if (xField.getText().length() > 0 && yField.getText().length() > 0) {
             int xValue = Integer.parseInt(xField.getText());
             int yValue = Integer.parseInt(yField.getText());
-            if (((xValue > 5) && (xValue <= 30)) && ((yValue > 5) && (yValue <= 30))) {
+            if (((xValue >= 5) && (xValue <= 30)) && ((yValue >= 5) && (yValue <= 30))) {
                 System.out.println("Good size");
                 okButton.setDisable(false);
             } else {

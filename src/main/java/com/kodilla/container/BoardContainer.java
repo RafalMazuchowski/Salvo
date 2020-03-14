@@ -8,17 +8,17 @@ public class BoardContainer {
 
     private static int horizontal = 10;
     private static int vertical = 10;
-    private Field[][] playerBoard = new Field[BoardContainer.horizontal][BoardContainer.vertical];
-    private Field[][] computerBoard = new Field[BoardContainer.horizontal][BoardContainer.vertical];
+    private static Field[][] playerBoard = new Field[BoardContainer.horizontal][BoardContainer.vertical];
+    private static Field[][] computerBoard = new Field[BoardContainer.horizontal][BoardContainer.vertical];
 
     public BoardContainer() {
     }
 
-    public Field[][] getPlayerBoard() {
+    public static Field[][] getPlayerBoard() {
         return playerBoard;
     }
 
-    public Field[][] getComputerBoard() {
+    public static Field[][] getComputerBoard() {
         return computerBoard;
     }
 
@@ -34,6 +34,7 @@ public class BoardContainer {
         }
         return tempField;
     }
+
     public Field[][] setNewFieldAtPlayerField(Field move) {
         ShootsLogic playerShootLogic = new ShootsLogic();
         playerShootLogic.shootValidator(playerBoard, move);
@@ -55,7 +56,7 @@ public class BoardContainer {
     }
 
     public static int getShipsCount(){
-        return (horizontal * vertical) / 5;
+        return (horizontal * vertical) / 4;
     }
 
     public void setSize(int horizontal, int vertical) {

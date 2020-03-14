@@ -1,6 +1,6 @@
-package com.kodilla.GUI;
+package com.kodilla.GUI.main;
 
-import com.kodilla.GUI.spacing.Settings;
+import com.kodilla.GUI.placing.Settings;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
