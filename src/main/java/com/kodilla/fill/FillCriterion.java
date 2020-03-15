@@ -8,7 +8,7 @@ import java.util.LinkedList;
 
 @Ignore
 public class FillCriterion {
-    BoardContainer boardContainer = new BoardContainer();
+    BoardContainer boardContainer = BoardContainer.getInstance();
     int shipCounts;                                         // total ships counts - only in non-custom mode
     int fleetSize;
     int freeSea = boardContainer.getHorizontal() * boardContainer.getVertical();

@@ -1,41 +1,76 @@
 package com.kodilla.container;
 
-import com.kodilla.commander.ShootsLogic;
 import com.kodilla.fields.Field;
 import com.kodilla.fields.ShipField;
 
 public class BoardContainer {
+    private static final BoardContainer INSTANCE = new BoardContainer();
 
-    private static int horizontal = 10;
-    private static int vertical = 10;
-    private static Field[][] playerBoard = new Field[BoardContainer.horizontal][BoardContainer.vertical];
-    private static Field[][] computerBoard = new Field[BoardContainer.horizontal][BoardContainer.vertical];
+    private int horizontal;
+    private int vertical;
+    private Field[][] playerBoard;
+    private Field[][] computerBoard;
 
-    public BoardContainer() {
+    private BoardContainer() {
+        horizontal = 10;
+        vertical = 10;
     }
 
-    public static Field[][] getPlayerBoard() {
+    public static BoardContainer getInstance() {
+        return INSTANCE;
+    }
+
+    public void setSize(int horizontal, int vertical) {
+        this.horizontal = horizontal;
+        this.vertical = vertical;
+        createBoards();
+        //playerBoard = new Field[BoardContainer.horizontal][BoardContainer.vertical];
+    }
+
+    public int getHorizontal() {
+        return horizontal;
+    }
+
+    public int getVertical() {
+        return vertical;
+    }
+
+    public int getShipsCount() {
+        return (horizontal * vertical) / 4;
+    }
+
+    public Field[][] getPlayerBoard() {
+        if (playerBoard == null) {
+            createBoards();
+        }
         return playerBoard;
     }
 
-    public static Field[][] getComputerBoard() {
+    public Field[][] getComputerBoard() {
+        if (computerBoard == null) {
+            createBoards();
+        }
         return computerBoard;
     }
 
-    public Field[][] addShip (Field[][] tempField, int x, int y){
+    public void addPlayerShip(int x, int y) {
         ShipField shipField = new ShipField();
-        if (tempField[x - 1][y - 1] == null){
+        if (playerBoard[x - 1][y - 1] == null) {
             System.out.println("ship");
             shipField.emptyField();
-            tempField[x - 1][y - 1] = shipField;
+            playerBoard[x - 1][y - 1] = shipField;
         } else {
-            tempField[x - 1][y - 1] = null;
+            playerBoard[x - 1][y - 1] = null;
             System.out.println("null");
         }
-        return tempField;
     }
 
-    public Field[][] setNewFieldAtPlayerField(Field move) {
+    private void createBoards() {
+        playerBoard = new Field[horizontal][vertical];
+        computerBoard = new Field[horizontal][vertical];
+    }
+
+    /*public Field[][] setNewFieldAtPlayerField(Field move) {
         ShootsLogic playerShootLogic = new ShootsLogic();
         playerShootLogic.shootValidator(playerBoard, move);
         return playerBoard;
@@ -45,25 +80,8 @@ public class BoardContainer {
         ShootsLogic computerShootLogic = new ShootsLogic();
         computerShootLogic.shootValidator(computerBoard, move);
         return computerBoard;
-    }
+    }*/
 
-    public static int getHorizontal() {
-        return horizontal;
-    }
-
-    public static int getVertical() {
-        return vertical;
-    }
-
-    public static int getShipsCount(){
-        return (horizontal * vertical) / 4;
-    }
-
-    public void setSize(int horizontal, int vertical) {
-        BoardContainer.horizontal = horizontal;
-        BoardContainer.vertical = vertical;
-        //playerBoard = new Field[BoardContainer.horizontal][BoardContainer.vertical];
-    }
 /*
     public void setVertical(int vertical) {
         BoardContainer.vertical = vertical;

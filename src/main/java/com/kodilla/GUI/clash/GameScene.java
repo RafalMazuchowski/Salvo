@@ -23,6 +23,7 @@ public class GameScene implements IRefreshed {
     private Image imageback = new Image("textures/background.png");
     private Image title = new Image("textures/seaBattle.jpg");
     private DisplayedBoard displayedBoard;
+    private BoardContainer boardContainer = BoardContainer.getInstance();
 
     private ShipContainer shipContainer = new ShipContainer();
 
@@ -31,7 +32,7 @@ public class GameScene implements IRefreshed {
 
     public Scene start() {
         displayedBoard = new DisplayedBoard();
-        generatedComputerShips(BoardContainer.getComputerBoard());
+        generatedComputerShips(boardContainer.getComputerBoard());
         HBox hBox = new HBox();
         VBox rightBox = new VBox();
         VBox leftBox = new VBox();
@@ -58,7 +59,7 @@ public class GameScene implements IRefreshed {
         hBox.setBackground(background);
 
         Scene scene = new Scene(hBox, Color.STEELBLUE);
-        displayedBoard.updateLabels(BoardContainer.getPlayerBoard());
+        displayedBoard.updateLabels(boardContainer.getPlayerBoard());
         return scene;
     }
 
@@ -96,8 +97,8 @@ public class GameScene implements IRefreshed {
         scorePane.setAlignment(Pos.CENTER);
         scorePane.setStyle("-fx-background-color: #0089b3;" +
                 "-fx-border-color: #ffffff;");
-        playersShips = new Label(shipContainer.getShipCounts() + "/" + BoardContainer.getShipsCount());
-        cpuShips = new Label(shipContainer.getShipCounts() + "/" + BoardContainer.getShipsCount());
+        playersShips = new Label(shipContainer.getShipCounts() + "/" + boardContainer.getShipsCount());
+        cpuShips = new Label(shipContainer.getShipCounts() + "/" + boardContainer.getShipsCount());
         Label describe = new Label("SUNKEN SHIPS: ");
         Label playerDes = new Label("PLAYER: ");
         Label cpuDes = new Label("CPU: ");
@@ -119,13 +120,13 @@ public class GameScene implements IRefreshed {
     private void generatedComputerShips(Field[][] board) {
         int x, y;
         Random random = new Random();
-        int shipsTarget = BoardContainer.getShipsCount();
+        int shipsTarget = boardContainer.getShipsCount();
         int computerShips = 0;
         while (computerShips < shipsTarget) {
 
             do {
-                x = random.nextInt(BoardContainer.getHorizontal());
-                y = random.nextInt(BoardContainer.getVertical());
+                x = random.nextInt(boardContainer.getHorizontal());
+                y = random.nextInt(boardContainer.getVertical());
             } while (board[x][y] != null);
 
             board[x][y] = new ShipField();
@@ -141,8 +142,8 @@ public class GameScene implements IRefreshed {
 
     @Override
     public void refreshScore() {
-        playersShips.setText(shipContainer.getShipCounts() + "/" + BoardContainer.getShipsCount());
-        cpuShips.setText(shipContainer.getShipCounts() + "/" + BoardContainer.getShipsCount());
+        playersShips.setText(shipContainer.getShipCounts() + "/" + boardContainer.getShipsCount());
+        cpuShips.setText(shipContainer.getShipCounts() + "/" + boardContainer.getShipsCount());
 
     }
 }
