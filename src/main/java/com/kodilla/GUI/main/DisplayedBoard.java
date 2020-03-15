@@ -101,10 +101,10 @@ public class DisplayedBoard {
                         "-fx-border-color: rgb(52,52,52); -fx-border-width: 1px;");
                 System.out.println("Ships: " + BoardContainer.getInstance().getPlayerShipsCount());
                 System.out.println("MISS");
+                boardContainer.processCPUHits();
             }
             button.setDisable(true);
             button.setOpacity(80.0);
-            boardContainer.processCPUHit();
             updateLabels();
             iRefreshed.refreshScore();
         });

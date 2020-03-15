@@ -67,7 +67,14 @@ public class BoardContainer {
         }
     }
 
-    public void processCPUHit() {
+    public void processCPUHits() {
+        boolean result;
+        do {
+            result = processSingleCPUHit();
+        } while (result);
+    }
+
+    private boolean processSingleCPUHit() {
         Random random = new Random();
         int x;
         int y;
@@ -79,11 +86,12 @@ public class BoardContainer {
         } while ((field instanceof ShootField) || (field instanceof ShipField && ((ShipField) field).isHit()));
         if (field == null) {
             playerBoard[x][y] = new ShootField();
+            return false;
         } else {
             ((ShipField)playerBoard[x][y]).setHit(true);
+            return true;
         }
     }
-
 
     public Field getPlayerField(int x, int y) {
         return playerBoard[x][y];
