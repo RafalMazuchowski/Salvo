@@ -67,6 +67,24 @@ public class BoardContainer {
         }
     }
 
+    public void processCPUHit() {
+        Random random = new Random();
+        int x;
+        int y;
+        Field field;
+        do {
+            x = random.nextInt(getHorizontal());
+            y = random.nextInt(getVertical());
+            field = playerBoard[x][y];
+        } while ((field instanceof ShootField) || (field instanceof ShipField && ((ShipField) field).isHit()));
+        if (field == null) {
+            playerBoard[x][y] = new ShootField();
+        } else {
+            ((ShipField)playerBoard[x][y]).setHit(true);
+        }
+    }
+
+
     public Field getPlayerField(int x, int y) {
         return playerBoard[x][y];
     }

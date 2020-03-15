@@ -1,6 +1,9 @@
 package com.kodilla.GUI.main;
 
 import com.kodilla.container.BoardContainer;
+import com.kodilla.fields.Field;
+import com.kodilla.fields.ShipField;
+import com.kodilla.fields.ShootField;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -41,9 +44,21 @@ public class DisplayedBoard {
     public void updateLabels() {
         for (int i = 0; i < boardContainer.getHorizontal(); i++) {
             for (int j = 0; j < boardContainer.getVertical(); j++) {
-                if (boardContainer.getPlayerField(i, j) != null) {
-                    labels[i][j].setStyle("-fx-background-color: rgb(0,26,255); " +
-                            "-fx-border-color: #343434; -fx-border-width: 1px;");
+                Field field = boardContainer.getPlayerField(i, j);
+                if (field != null) {
+                    if (field instanceof ShootField) {
+                        labels[i][j].setStyle("-fx-background-color: rgb(75,75,75); " +
+                                "-fx-border-color: rgb(52,52,52); -fx-border-width: 1px;");
+                    }
+                    if (field instanceof ShipField) {
+                        if (((ShipField) field).isHit()) {
+                            labels[i][j].setStyle("-fx-background-color: rgb(225,38,0); " +
+                                    "-fx-border-color: #000000; -fx-border-width: 1px;");
+                        } else {
+                            labels[i][j].setStyle("-fx-background-color: rgb(0,26,255); " +
+                                    "-fx-border-color: #343434; -fx-border-width: 1px;");
+                        }
+                    }
                 }
             }
         }
@@ -89,6 +104,8 @@ public class DisplayedBoard {
             }
             button.setDisable(true);
             button.setOpacity(80.0);
+            boardContainer.processCPUHit();
+            updateLabels();
             iRefreshed.refreshScore();
         });
         grid.add(button, i % boardContainer.getHorizontal() + 1, i / boardContainer.getHorizontal() + 1);
