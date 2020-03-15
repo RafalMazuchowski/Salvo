@@ -73,11 +73,11 @@ public class DisplayedBoard {
             if (boardContainer.addPlayerShip(x - 1, y - 1)) {
                 button.setStyle("-fx-background-color: rgb(0,26,255); " +
                         "-fx-border-color: #000000; -fx-border-width: 1px;");
-                System.out.println("Ships: " + BoardContainer.getInstance().getPlayerShipsCount());
+                System.out.println("Ships: " + BoardContainer.getInstance().getPlayerShipsCount(false));
                 System.out.println("Marked");
             } else {
                 button.setStyle(null);
-                System.out.println("Ships: " + BoardContainer.getInstance().getPlayerShipsCount());
+                System.out.println("Ships: " + BoardContainer.getInstance().getPlayerShipsCount(false));
                 System.out.println("Unmarked");
             }
             iRefreshed.refreshScore();
@@ -94,12 +94,12 @@ public class DisplayedBoard {
             if (boardContainer.processPlayerHit(x - 1, y - 1)) {
                 button.setStyle("-fx-background-color: rgb(225,38,0); " +
                         "-fx-border-color: #000000; -fx-border-width: 1px;");
-                System.out.println("Ships: " + BoardContainer.getInstance().getPlayerShipsCount());
+                System.out.println("Ships: " + BoardContainer.getInstance().getPlayerShipsCount(false));
                 System.out.println("HIT!");
             } else {
                 button.setStyle("-fx-background-color: rgb(75,75,75); " +
                         "-fx-border-color: rgb(52,52,52); -fx-border-width: 1px;");
-                System.out.println("Ships: " + BoardContainer.getInstance().getPlayerShipsCount());
+                System.out.println("Ships: " + BoardContainer.getInstance().getPlayerShipsCount(false));
                 System.out.println("MISS");
                 boardContainer.processCPUHits();
             }

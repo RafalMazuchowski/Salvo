@@ -90,8 +90,8 @@ public class GameScene implements IRefreshed {
         scorePane.setAlignment(Pos.CENTER);
         scorePane.setStyle("-fx-background-color: #0089b3;" +
                 "-fx-border-color: #ffffff;");
-        playersShips = new Label(BoardContainer.getInstance().getPlayerShipsCount() + "/" + boardContainer.getMaxShipsCount());
-        cpuShips = new Label(BoardContainer.getInstance().getPlayerShipsCount() + "/" + boardContainer.getMaxShipsCount());
+        playersShips = new Label("0 /" + boardContainer.getMaxShipsCount());
+        cpuShips = new Label("0 /" + boardContainer.getMaxShipsCount());
         Label describe = new Label("SUNKEN SHIPS: ");
         Label playerDes = new Label("PLAYER: ");
         Label cpuDes = new Label("CPU: ");
@@ -112,8 +112,14 @@ public class GameScene implements IRefreshed {
 
     @Override
     public void refreshScore() {
-        playersShips.setText(BoardContainer.getInstance().getPlayerShipsCount() + "/" + boardContainer.getMaxShipsCount());
-        cpuShips.setText(BoardContainer.getInstance().getPlayerShipsCount() + "/" + boardContainer.getMaxShipsCount());
+        playersShips.setText(boardContainer.getComputerShipsCount(true) + "/" + boardContainer.getMaxShipsCount());
+        cpuShips.setText(boardContainer.getPlayerShipsCount(true) + "/" + boardContainer.getMaxShipsCount());
+        if (boardContainer.getComputerShipsCount(true) == boardContainer.getMaxShipsCount()){
+            System.out.println("USER WIN!");
+        }
+        if (boardContainer.getPlayerShipsCount(true) == boardContainer.getMaxShipsCount()){
+            System.out.println("CPU WIN!");
+        }
 
     }
 }

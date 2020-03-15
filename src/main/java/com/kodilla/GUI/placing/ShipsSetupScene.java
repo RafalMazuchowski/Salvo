@@ -91,7 +91,7 @@ public class ShipsSetupScene implements IRefreshed {
         scorePane.setAlignment(Pos.CENTER);
         scorePane.setStyle("-fx-background-color: #0089b3;" +
                 "-fx-border-color: #ffffff;");
-        shipLabel = new Label(BoardContainer.getInstance().getPlayerShipsCount() + "/" + BoardContainer.getInstance().getMaxShipsCount());
+        shipLabel = new Label(BoardContainer.getInstance().getPlayerShipsCount(false) + "/" + BoardContainer.getInstance().getMaxShipsCount());
         Label shipQty = new Label("SHIPS: ");
         startGameButton = new Button("START");
         startGameButton.setOnAction(e -> {
@@ -108,7 +108,7 @@ public class ShipsSetupScene implements IRefreshed {
 
     @Override
     public void refreshScore() {
-        shipLabel.setText(BoardContainer.getInstance().getPlayerShipsCount() + "/" + BoardContainer.getInstance().getMaxShipsCount());
-        startGameButton.setDisable(BoardContainer.getInstance().getPlayerShipsCount() != BoardContainer.getInstance().getMaxShipsCount());
+        shipLabel.setText(BoardContainer.getInstance().getPlayerShipsCount(false) + "/" + BoardContainer.getInstance().getMaxShipsCount());
+        startGameButton.setDisable(BoardContainer.getInstance().getPlayerShipsCount(false) != BoardContainer.getInstance().getMaxShipsCount());
     }
 }

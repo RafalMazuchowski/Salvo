@@ -71,26 +71,7 @@ public class BoardContainer {
         boolean result;
         do {
             result = processSingleCPUHit();
-        } while (result);
-    }
-
-    private boolean processSingleCPUHit() {
-        Random random = new Random();
-        int x;
-        int y;
-        Field field;
-        do {
-            x = random.nextInt(getHorizontal());
-            y = random.nextInt(getVertical());
-            field = playerBoard[x][y];
-        } while ((field instanceof ShootField) || (field instanceof ShipField && ((ShipField) field).isHit()));
-        if (field == null) {
-            playerBoard[x][y] = new ShootField();
-            return false;
-        } else {
-            ((ShipField)playerBoard[x][y]).setHit(true);
-            return true;
-        }
+        } while (result && getPlayerShipsCount(true) != getMaxShipsCount());
     }
 
     public Field getPlayerField(int x, int y) {
@@ -120,12 +101,36 @@ public class BoardContainer {
         }
     }
 
-    public int getPlayerShipsCount() {
+    public int getPlayerShipsCount(boolean onlyHit) {
         int count = 0;
         for (int i = 0; i < horizontal; i++) {
             for (int j = 0; j < vertical; j++) {
                 if (playerBoard[i][j] instanceof ShipField) {
-                    count++;
+                    if (onlyHit) {
+                        if (((ShipField) playerBoard[i][j]).isHit()) {
+                            count++;
+                        }
+                    } else {
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
+    public int getComputerShipsCount(boolean onlyHit) {
+        int count = 0;
+        for (int i = 0; i < horizontal; i++) {
+            for (int j = 0; j < vertical; j++) {
+                if (computerBoard[i][j] instanceof ShipField) {
+                    if (onlyHit) {
+                        if (((ShipField) computerBoard[i][j]).isHit()) {
+                            count++;
+                        }
+                    } else {
+                        count++;
+                    }
                 }
             }
         }
@@ -135,6 +140,25 @@ public class BoardContainer {
     private void createBoards() {
         playerBoard = new Field[horizontal][vertical];
         computerBoard = new Field[horizontal][vertical];
+    }
+
+    private boolean processSingleCPUHit() {
+        Random random = new Random();
+        int x;
+        int y;
+        Field field;
+        do {
+            x = random.nextInt(getHorizontal());
+            y = random.nextInt(getVertical());
+            field = playerBoard[x][y];
+        } while ((field instanceof ShootField) || (field instanceof ShipField && ((ShipField) field).isHit()));
+        if (field == null) {
+            playerBoard[x][y] = new ShootField();
+            return false;
+        } else {
+            ((ShipField) playerBoard[x][y]).setHit(true);
+            return true;
+        }
     }
 
     /*public Field[][] setNewFieldAtPlayerField(Field move) {
