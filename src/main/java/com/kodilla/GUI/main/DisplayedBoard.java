@@ -1,7 +1,6 @@
 package com.kodilla.GUI.main;
 
 import com.kodilla.container.BoardContainer;
-import com.kodilla.container.ShipContainer;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,13 +10,11 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 
 public class DisplayedBoard {
-    private ShipContainer shipContainer;
     private IRefreshed iRefreshed;
     private Label[][] labels;
     private BoardContainer boardContainer = BoardContainer.getInstance();
 
-    public GridPane getBoard(boolean buttons, boolean game, ShipContainer shipContainer, IRefreshed iRefreshed) {
-        this.shipContainer = shipContainer;
+    public GridPane getBoard(boolean buttons, boolean game, IRefreshed iRefreshed) {
         this.iRefreshed = iRefreshed;
         GridPane grid = new GridPane();
         rowsAndColumns(grid);
@@ -61,13 +58,11 @@ public class DisplayedBoard {
             if (boardContainer.addPlayerShip(x - 1, y - 1)) {
                 button.setStyle("-fx-background-color: rgb(0,26,255); " +
                         "-fx-border-color: #000000; -fx-border-width: 1px;");
-                shipContainer.setShipCounts(shipContainer.shipCounts + 1);
-                System.out.println("Ships: " + shipContainer.shipCounts);
+                System.out.println("Ships: " + BoardContainer.getInstance().getPlayerShipsCount());
                 System.out.println("Marked");
             } else {
                 button.setStyle(null);
-                shipContainer.setShipCounts(shipContainer.shipCounts - 1);
-                System.out.println("Ships: " + shipContainer.shipCounts);
+                System.out.println("Ships: " + BoardContainer.getInstance().getPlayerShipsCount());
                 System.out.println("Unmarked");
             }
             iRefreshed.refreshScore();
@@ -84,13 +79,12 @@ public class DisplayedBoard {
             if (boardContainer.processPlayerHit(x - 1, y - 1)) {
                 button.setStyle("-fx-background-color: rgb(225,38,0); " +
                         "-fx-border-color: #000000; -fx-border-width: 1px;");
-                shipContainer.setShipCounts(shipContainer.shipCounts + 1);
-                System.out.println("Ships: " + shipContainer.shipCounts);
+                System.out.println("Ships: " + BoardContainer.getInstance().getPlayerShipsCount());
                 System.out.println("HIT!");
             } else {
                 button.setStyle("-fx-background-color: rgb(75,75,75); " +
                         "-fx-border-color: rgb(52,52,52); -fx-border-width: 1px;");
-                System.out.println("Ships: " + shipContainer.shipCounts);
+                System.out.println("Ships: " + BoardContainer.getInstance().getPlayerShipsCount());
                 System.out.println("MISS");
             }
             button.setDisable(true);

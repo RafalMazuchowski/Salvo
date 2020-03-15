@@ -38,7 +38,7 @@ public class BoardContainer {
         return vertical;
     }
 
-    public int getShipsCount() {
+    public int getMaxShipsCount() {
         return (horizontal * vertical) / 4;
     }
 
@@ -74,7 +74,7 @@ public class BoardContainer {
     public void generatedComputerShips() {
         int x, y;
         Random random = new Random();
-        int shipsTarget = getShipsCount();
+        int shipsTarget = getMaxShipsCount();
         int computerShips = 0;
         while (computerShips < shipsTarget) {
 
@@ -87,11 +87,23 @@ public class BoardContainer {
             computerShips++;
         }
         System.out.println(">> COMPUTER PLACING <<");
-        for (int i = 0; i < computerBoard.length; i++){
-            for (int j = 0; j < computerBoard[i].length; j++){
-                System.out.println((char)(j + 65) + " " + (i + 1) + " : " + ((computerBoard[i][j] != null) ? "Ship" : "-"));
+        for (int i = 0; i < computerBoard.length; i++) {
+            for (int j = 0; j < computerBoard[i].length; j++) {
+                System.out.println((char) (j + 65) + " " + (i + 1) + " : " + ((computerBoard[i][j] != null) ? "Ship" : "-"));
             }
         }
+    }
+
+    public int getPlayerShipsCount() {
+        int count = 0;
+        for (int i = 0; i < horizontal; i++) {
+            for (int j = 0; j < vertical; j++) {
+                if (playerBoard[i][j] instanceof ShipField) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
     private void createBoards() {

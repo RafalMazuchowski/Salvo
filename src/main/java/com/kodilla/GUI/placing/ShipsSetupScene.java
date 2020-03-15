@@ -4,7 +4,6 @@ import com.kodilla.GUI.main.DisplayedBoard;
 import com.kodilla.GUI.main.IRefreshed;
 import com.kodilla.GUI.clash.GameScene;
 import com.kodilla.container.BoardContainer;
-import com.kodilla.container.ShipContainer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -21,7 +20,6 @@ public class ShipsSetupScene implements IRefreshed {
     private Image imageback = new Image("textures/background.png");
     private Image title = new Image("textures/seaBattle.jpg");
     private DisplayedBoard displayedBoard;
-    private ShipContainer shipContainer = new ShipContainer();
 
     private Label shipLabel;
     private Button startGameButton;
@@ -74,7 +72,7 @@ public class ShipsSetupScene implements IRefreshed {
         mainGrid.setPadding(new Insets(11.5, 12.5, 13.5, 14.5));
         mainGrid.setHgap(5.5);
         mainGrid.setVgap(5.5);
-        mainGrid.getChildren().add(displayedBoard.getBoard(true, false, shipContainer, this));
+        mainGrid.getChildren().add(displayedBoard.getBoard(true, false, this));
         return mainGrid;
     }
 
@@ -84,7 +82,7 @@ public class ShipsSetupScene implements IRefreshed {
         childGrid.setPadding(new Insets(20.5, 20.5, 20.5, 20.5));
         childGrid.setHgap(5.5);
         childGrid.setVgap(5.5);
-        childGrid.getChildren().add(displayedBoard.getBoard(false, false, shipContainer, this));
+        childGrid.getChildren().add(displayedBoard.getBoard(false, false, this));
         return childGrid;
     }
 
@@ -93,7 +91,7 @@ public class ShipsSetupScene implements IRefreshed {
         scorePane.setAlignment(Pos.CENTER);
         scorePane.setStyle("-fx-background-color: #0089b3;" +
                 "-fx-border-color: #ffffff;");
-        shipLabel = new Label(shipContainer.getShipCounts() + "/" + BoardContainer.getInstance().getShipsCount());
+        shipLabel = new Label(BoardContainer.getInstance().getPlayerShipsCount() + "/" + BoardContainer.getInstance().getMaxShipsCount());
         Label shipQty = new Label("SHIPS: ");
         startGameButton = new Button("START");
         startGameButton.setOnAction(e -> {
@@ -110,7 +108,7 @@ public class ShipsSetupScene implements IRefreshed {
 
     @Override
     public void refreshScore() {
-        shipLabel.setText(shipContainer.getShipCounts() + "/" + BoardContainer.getInstance().getShipsCount());
-        startGameButton.setDisable(shipContainer.getShipCounts() != BoardContainer.getInstance().getShipsCount());
+        shipLabel.setText(BoardContainer.getInstance().getPlayerShipsCount() + "/" + BoardContainer.getInstance().getMaxShipsCount());
+        startGameButton.setDisable(BoardContainer.getInstance().getPlayerShipsCount() != BoardContainer.getInstance().getMaxShipsCount());
     }
 }
