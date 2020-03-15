@@ -6,6 +6,7 @@ import com.kodilla.container.BoardContainer;
 import com.kodilla.container.ShipContainer;
 import com.kodilla.fields.Field;
 import com.kodilla.fields.ShipField;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -22,16 +23,20 @@ public class GameScene implements IRefreshed {
     private Image imageback = new Image("textures/background.png");
     private Image title = new Image("textures/seaBattle.jpg");
     private DisplayedBoard displayedBoard;
+
     private ShipContainer shipContainer = new ShipContainer();
 
-    private Label shipLabel;
+    private Label playersShips;
+    private Label cpuShips;
 
     public Scene start() {
         displayedBoard = new DisplayedBoard();
         generatedComputerShips(BoardContainer.getComputerBoard());
-        HBox box = new HBox();
+        HBox hBox = new HBox();
         VBox rightBox = new VBox();
         VBox leftBox = new VBox();
+        rightBox.setAlignment(Pos.TOP_CENTER);
+        leftBox.setAlignment(Pos.TOP_CENTER);
 
         GridPane titlePane = getTitle();
         GridPane mainGrid = getMainGrid();
@@ -49,10 +54,10 @@ public class GameScene implements IRefreshed {
         BackgroundImage backgroundImage = new BackgroundImage(imageback, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.ROUND, BackgroundPosition.DEFAULT, backgroundSize);
         Background background = new Background(backgroundImage);
 
-        box.getChildren().addAll(leftBox, rightBox);
-        box.setBackground(background);
+        hBox.getChildren().addAll(leftBox, rightBox);
+        hBox.setBackground(background);
 
-        Scene scene = new Scene(box, Color.STEELBLUE);
+        Scene scene = new Scene(hBox, Color.STEELBLUE);
         displayedBoard.updateLabels(BoardContainer.getPlayerBoard());
         return scene;
     }
@@ -91,11 +96,23 @@ public class GameScene implements IRefreshed {
         scorePane.setAlignment(Pos.CENTER);
         scorePane.setStyle("-fx-background-color: #0089b3;" +
                 "-fx-border-color: #ffffff;");
-        shipLabel = new Label(shipContainer.getShipCounts() + "/" + BoardContainer.getShipsCount());
-        Label shipQty = new Label("SUNK: ");
-        scorePane.setPrefSize(70, 50);
-        scorePane.add(shipQty, 0, 0);
-        scorePane.add(shipLabel, 2, 0);
+        playersShips = new Label(shipContainer.getShipCounts() + "/" + BoardContainer.getShipsCount());
+        cpuShips = new Label(shipContainer.getShipCounts() + "/" + BoardContainer.getShipsCount());
+        Label describe = new Label("SUNKEN SHIPS: ");
+        Label playerDes = new Label("PLAYER: ");
+        Label cpuDes = new Label("CPU: ");
+        scorePane.add(describe, 1, 0);
+        scorePane.add(playerDes, 0, 1);
+        scorePane.add(cpuDes, 0, 2);
+        scorePane.add(playersShips, 1, 1);
+        scorePane.add(cpuShips, 1, 2);
+        scorePane.setHalignment(describe, HPos.LEFT);
+        scorePane.setHalignment(playersShips, HPos.CENTER);
+        scorePane.setHalignment(cpuShips, HPos.CENTER);
+        scorePane.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        scorePane.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        scorePane.setHgap(30);
+        scorePane.setPadding(new Insets(10));
         return scorePane;
     }
 
@@ -124,7 +141,9 @@ public class GameScene implements IRefreshed {
 
     @Override
     public void refreshScore() {
-        shipLabel.setText(shipContainer.getShipCounts() + "/" + BoardContainer.getShipsCount());
+        playersShips.setText(shipContainer.getShipCounts() + "/" + BoardContainer.getShipsCount());
+        cpuShips.setText(shipContainer.getShipCounts() + "/" + BoardContainer.getShipsCount());
+
     }
 }
 

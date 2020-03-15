@@ -141,7 +141,7 @@ public class DisplayedBoard {
 
     private Button createButton() {
         Button button = new Button();
-        button.setMinSize(30.0, 30.0);
+        button.setMinSize(40.0, 40.0);
         button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         return button;
     }
@@ -149,7 +149,7 @@ public class DisplayedBoard {
     private Label createLabel(String text) {
         Label label = new Label(text);
         label.setText(text);
-        label.setMinSize(20.0, 20.0);
+        label.setMinSize(30.0, 30.0);
         label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         label.setAlignment(Pos.CENTER);
         label.setStyle("-fx-border-color: black;");

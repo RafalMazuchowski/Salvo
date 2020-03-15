@@ -66,8 +66,8 @@ public class Settings {
                     primaryStage.setScene(shipsSetupScene.start(primaryStage));
                     primaryStage.setX(200);
                     primaryStage.setY(50);
-                    primaryStage.setMinWidth(650);
-                    primaryStage.setMinHeight(550);
+                    primaryStage.setMinWidth(880);
+                    primaryStage.setMinHeight(660);
                 }
         );
 

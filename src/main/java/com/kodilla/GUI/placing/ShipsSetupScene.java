@@ -30,9 +30,11 @@ public class ShipsSetupScene implements IRefreshed {
     public Scene start(Stage stage) {
         this.primaryStage = stage;
         displayedBoard = new DisplayedBoard();
-        HBox box = new HBox();
+        HBox hBox = new HBox();
         VBox rightBox = new VBox();
         VBox leftBox = new VBox();
+        rightBox.setAlignment(Pos.TOP_CENTER);
+        leftBox.setAlignment(Pos.TOP_CENTER);
 
         GridPane titlePane = getTitle();
         GridPane mainGrid = getMainGrid();
@@ -50,10 +52,10 @@ public class ShipsSetupScene implements IRefreshed {
         BackgroundImage backgroundImage = new BackgroundImage(imageback, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.ROUND, BackgroundPosition.DEFAULT, backgroundSize);
         Background background = new Background(backgroundImage);
 
-        box.getChildren().addAll(leftBox, rightBox);
-        box.setBackground(background);
+        hBox.getChildren().addAll(leftBox, rightBox);
+        hBox.setBackground(background);
 
-        Scene scene = new Scene(box, Color.STEELBLUE);
+        Scene scene = new Scene(hBox, Color.STEELBLUE);
         return scene;
     }
 
