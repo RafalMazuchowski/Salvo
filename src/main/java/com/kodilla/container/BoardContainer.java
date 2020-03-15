@@ -2,6 +2,9 @@ package com.kodilla.container;
 
 import com.kodilla.fields.Field;
 import com.kodilla.fields.ShipField;
+import com.kodilla.fields.ShootField;
+
+import java.util.Random;
 
 public class BoardContainer {
     private static final BoardContainer INSTANCE = new BoardContainer();
@@ -39,29 +42,55 @@ public class BoardContainer {
         return (horizontal * vertical) / 4;
     }
 
-    public Field[][] getPlayerBoard() {
-        if (playerBoard == null) {
-            createBoards();
-        }
-        return playerBoard;
-    }
-
-    public Field[][] getComputerBoard() {
-        if (computerBoard == null) {
-            createBoards();
-        }
-        return computerBoard;
-    }
-
-    public void addPlayerShip(int x, int y) {
+    public boolean addPlayerShip(int x, int y) {
         ShipField shipField = new ShipField();
-        if (playerBoard[x - 1][y - 1] == null) {
+        if (playerBoard[x][y] == null) {
             System.out.println("ship");
-            shipField.emptyField();
-            playerBoard[x - 1][y - 1] = shipField;
+            playerBoard[x][y] = shipField;
+            return true;
         } else {
-            playerBoard[x - 1][y - 1] = null;
+            playerBoard[x][y] = null;
             System.out.println("null");
+            return false;
+        }
+    }
+
+    public boolean processPlayerHit(int x, int y) {
+        if (computerBoard[x][y] == null) {
+            computerBoard[x][y] = new ShootField();
+            System.out.println("Water...");
+            return false;
+        } else {
+            ((ShipField) computerBoard[x][y]).setHit(true);
+            System.out.println("Ship was hit!");
+            return true;
+        }
+    }
+
+    public Field getPlayerField(int x, int y) {
+        return playerBoard[x][y];
+    }
+
+    public void generatedComputerShips() {
+        int x, y;
+        Random random = new Random();
+        int shipsTarget = getShipsCount();
+        int computerShips = 0;
+        while (computerShips < shipsTarget) {
+
+            do {
+                x = random.nextInt(getHorizontal());
+                y = random.nextInt(getVertical());
+            } while (computerBoard[x][y] != null);
+
+            computerBoard[x][y] = new ShipField();
+            computerShips++;
+        }
+        System.out.println(">> COMPUTER PLACING <<");
+        for (int i = 0; i < computerBoard.length; i++){
+            for (int j = 0; j < computerBoard[i].length; j++){
+                System.out.println((char)(j + 65) + " " + (i + 1) + " : " + ((computerBoard[i][j] != null) ? "Ship" : "-"));
+            }
         }
     }
 

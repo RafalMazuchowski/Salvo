@@ -2,7 +2,6 @@ package com.kodilla.GUI.main;
 
 import com.kodilla.container.BoardContainer;
 import com.kodilla.container.ShipContainer;
-import com.kodilla.fields.Field;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -42,10 +41,10 @@ public class DisplayedBoard {
         return frame(grid);
     }
 
-    public void updateLabels(Field[][] board) {
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if (board[i][j] != null) {
+    public void updateLabels() {
+        for (int i = 0; i < boardContainer.getHorizontal(); i++) {
+            for (int j = 0; j < boardContainer.getVertical(); j++) {
+                if (boardContainer.getPlayerField(i, j) != null) {
                     labels[i][j].setStyle("-fx-background-color: rgb(0,26,255); " +
                             "-fx-border-color: #343434; -fx-border-width: 1px;");
                 }
@@ -59,7 +58,7 @@ public class DisplayedBoard {
         int y = i / boardContainer.getHorizontal() + 1;
         button.setOnAction(e -> {
             System.out.println(x + "x" + y);
-            if (boardContainer.getPlayerBoard()[x - 1][y - 1] == null) {
+            if (boardContainer.addPlayerShip(x - 1, y - 1)) {
                 button.setStyle("-fx-background-color: rgb(0,26,255); " +
                         "-fx-border-color: #000000; -fx-border-width: 1px;");
                 shipContainer.setShipCounts(shipContainer.shipCounts + 1);
@@ -72,7 +71,6 @@ public class DisplayedBoard {
                 System.out.println("Unmarked");
             }
             iRefreshed.refreshScore();
-            boardContainer.addPlayerShip(x, y);
         });
         grid.add(button, i % boardContainer.getHorizontal() + 1, i / boardContainer.getHorizontal() + 1);
     }
@@ -83,17 +81,17 @@ public class DisplayedBoard {
         int y = i / boardContainer.getHorizontal() + 1;
         button.setOnAction(e -> {
             System.out.println(x + "x" + y);
-            if (boardContainer.getComputerBoard()[x - 1][y - 1] == null) {
-                button.setStyle("-fx-background-color: rgb(75,75,75); " +
-                        "-fx-border-color: rgb(52,52,52); -fx-border-width: 1px;");
-                System.out.println("Ships: " + shipContainer.shipCounts);
-                System.out.println("MISS");
-            } else {
+            if (boardContainer.processPlayerHit(x - 1, y - 1)) {
                 button.setStyle("-fx-background-color: rgb(225,38,0); " +
                         "-fx-border-color: #000000; -fx-border-width: 1px;");
                 shipContainer.setShipCounts(shipContainer.shipCounts + 1);
                 System.out.println("Ships: " + shipContainer.shipCounts);
                 System.out.println("HIT!");
+            } else {
+                button.setStyle("-fx-background-color: rgb(75,75,75); " +
+                        "-fx-border-color: rgb(52,52,52); -fx-border-width: 1px;");
+                System.out.println("Ships: " + shipContainer.shipCounts);
+                System.out.println("MISS");
             }
             button.setDisable(true);
             button.setOpacity(80.0);

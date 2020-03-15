@@ -10,7 +10,7 @@ public class ShootsLogic {
         int x = move.getIdX() - 1;
         int y = move.getIdY() - 1;
 
-        if (tempBoard[x][y] == null){
+        /*if (tempBoard[x][y] == null){
             shoot.setHit(false);
             tempBoard[x][y] = shoot;
         } else {
@@ -20,7 +20,7 @@ public class ShootsLogic {
             } else if (tempBoard[x][y] instanceof ShootField){
                 shoot.setHit(false);
             }
-        }
+        }*/
         return tempBoard;
     }
 }

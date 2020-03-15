@@ -2,8 +2,8 @@ package com.kodilla.fields;
 
 public class ShipField extends Field{
     public short shipSize;
-    boolean hit;
-    boolean sunk;
+    private boolean hit;
+    private boolean sunk;
 
     public short getShipSize() {
         return shipSize;

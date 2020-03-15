@@ -32,7 +32,7 @@ public class GameScene implements IRefreshed {
 
     public Scene start() {
         displayedBoard = new DisplayedBoard();
-        generatedComputerShips(boardContainer.getComputerBoard());
+        boardContainer.generatedComputerShips();
         HBox hBox = new HBox();
         VBox rightBox = new VBox();
         VBox leftBox = new VBox();
@@ -59,7 +59,7 @@ public class GameScene implements IRefreshed {
         hBox.setBackground(background);
 
         Scene scene = new Scene(hBox, Color.STEELBLUE);
-        displayedBoard.updateLabels(boardContainer.getPlayerBoard());
+        displayedBoard.updateLabels();
         return scene;
     }
 
@@ -115,29 +115,6 @@ public class GameScene implements IRefreshed {
         scorePane.setHgap(30);
         scorePane.setPadding(new Insets(10));
         return scorePane;
-    }
-
-    private void generatedComputerShips(Field[][] board) {
-        int x, y;
-        Random random = new Random();
-        int shipsTarget = boardContainer.getShipsCount();
-        int computerShips = 0;
-        while (computerShips < shipsTarget) {
-
-            do {
-                x = random.nextInt(boardContainer.getHorizontal());
-                y = random.nextInt(boardContainer.getVertical());
-            } while (board[x][y] != null);
-
-            board[x][y] = new ShipField();
-            computerShips++;
-        }
-        System.out.println(">> COMPUTER PLACING <<");
-        for (int i = 0; i < board.length; i++){
-            for (int j = 0; j < board[i].length; j++){
-                System.out.println((char)(j + 65) + " " + (i + 1) + " : " + ((board[i][j] != null) ? "Ship" : "-"));
-            }
-        }
     }
 
     @Override

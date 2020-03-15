@@ -1,15 +1,6 @@
 package com.kodilla.fields;
 
 public class ShootField extends Field {
-    boolean hit;
-
-    public boolean isHit() {
-        return hit;
-    }
-
-    public void setHit(boolean hit) {
-        this.hit = hit;
-    }
 
     @Override
     public boolean emptyField() {
