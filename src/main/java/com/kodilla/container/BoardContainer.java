@@ -27,7 +27,6 @@ public class BoardContainer {
         this.horizontal = horizontal;
         this.vertical = vertical;
         createBoards();
-        //playerBoard = new Field[BoardContainer.horizontal][BoardContainer.vertical];
     }
 
     public int getHorizontal() {
@@ -160,24 +159,4 @@ public class BoardContainer {
             return true;
         }
     }
-
-    /*public Field[][] setNewFieldAtPlayerField(Field move) {
-        ShootsLogic playerShootLogic = new ShootsLogic();
-        playerShootLogic.shootValidator(playerBoard, move);
-        return playerBoard;
-    }
-
-    public Field[][] setNewFieldAtComputerField(Field move) {
-        ShootsLogic computerShootLogic = new ShootsLogic();
-        computerShootLogic.shootValidator(computerBoard, move);
-        return computerBoard;
-    }*/
-
-/*
-    public void setVertical(int vertical) {
-        BoardContainer.vertical = vertical;
-        //playerBoard = new Field[BoardContainer.horizontal][BoardContainer.vertical];
-    }*/
-
-    // wypełnia BOARD zgodnie z kryteriami FillCriterion
 }

@@ -11,7 +11,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-
 public class Settings {
     public Scene configWindow(Stage primaryStage) {
         ShipsSetupScene shipsSetupScene = new ShipsSetupScene();
@@ -34,41 +33,15 @@ public class Settings {
         TextField yField = new TextField("10");
 
         Button okButton = new Button("OK");
-/*
-        Label sLabel = new Label();
-
-        Slider slider = new Slider(5, 100, 10);
-        slider.setBlockIncrement(40);
-        slider.setMajorTickUnit(1);
-        slider.setMinorTickCount(0);
-        slider.setSnapToTicks(true);
-        slider.setShowTickLabels(true);
-        slider.setShowTickMarks(true);
-
-        slider.valueProperty().addListener(
-                new ChangeListener<Number>() {
-
-                    public void changed(ObservableValue<? extends Number>
-                                                observable, Number oldValue, Number newValue) {
-
-                        sLabel.setText("Ships: " + newValue);
-                    }
-                });
-        sliderValue = (int) slider.getValue();
-
-*/
-
-        activeButton(xField, yField, okButton);
-
         okButton.setOnAction(e -> {
-                    BoardContainer.getInstance().setSize(Integer.parseInt(xField.getText()), Integer.parseInt(yField.getText()));
-                    primaryStage.setScene(shipsSetupScene.start(primaryStage));
-                    primaryStage.setX(200);
-                    primaryStage.setY(50);
-                    primaryStage.setMinWidth(880);
-                    primaryStage.setMinHeight(660);
-                }
-        );
+            BoardContainer.getInstance().setSize(Integer.parseInt(xField.getText()), Integer.parseInt(yField.getText()));
+            primaryStage.setScene(shipsSetupScene.start(primaryStage));
+            primaryStage.setX(200);
+            primaryStage.setY(50);
+            primaryStage.setMinWidth(880);
+            primaryStage.setMinHeight(660);
+        });
+        activeButton(xField, yField, okButton);
 
         col.getChildren().addAll(xLabel, xField);
         col.setAlignment(Pos.CENTER);

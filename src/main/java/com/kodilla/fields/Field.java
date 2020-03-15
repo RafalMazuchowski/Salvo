@@ -12,7 +12,7 @@ public abstract class Field {
         return idY;
     }
 
+    //functionality preparation for implementation in next version
     public abstract boolean emptyField();
 
 }
-// Board zawiera pola klasy Field, które będą rozszerzane

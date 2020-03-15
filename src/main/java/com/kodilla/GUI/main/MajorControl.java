@@ -13,7 +13,7 @@ public class MajorControl extends Application {
         launch(args);
     }
 
-    public static void close(){
+    public static void close() {
         System.out.println("Exit program.");
         window.close();
     }

@@ -1,10 +1,11 @@
 package com.kodilla.fields;
 
-public class ShipField extends Field{
+public class ShipField extends Field {
     public short shipSize;
     private boolean hit;
     private boolean sunk;
 
+    //functionality preparation for implementation in next version
     public short getShipSize() {
         return shipSize;
     }
@@ -21,6 +22,7 @@ public class ShipField extends Field{
         this.hit = hit;
     }
 
+    //functionality preparation for implementation in next version
     public boolean isSunk() {
         return sunk;
     }
@@ -33,9 +35,4 @@ public class ShipField extends Field{
     public boolean emptyField() {
         return false;
     }
-
-
-    //niezależny statek umieszczany RAZ na jednej z 2 tablic
-
-    //
 }

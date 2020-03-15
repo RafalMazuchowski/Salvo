@@ -1,8 +1,8 @@
 package com.kodilla.GUI.placing;
 
+import com.kodilla.GUI.clash.GameScene;
 import com.kodilla.GUI.main.DisplayedBoard;
 import com.kodilla.GUI.main.IRefreshed;
-import com.kodilla.GUI.clash.GameScene;
 import com.kodilla.container.BoardContainer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,6 +20,7 @@ public class ShipsSetupScene implements IRefreshed {
     private Image imageback = new Image("textures/background.png");
     private Image title = new Image("textures/seaBattle.jpg");
     private DisplayedBoard displayedBoard;
+    private BoardContainer boardContainer = BoardContainer.getInstance();
 
     private Label shipLabel;
     private Button startGameButton;
@@ -91,12 +92,11 @@ public class ShipsSetupScene implements IRefreshed {
         scorePane.setAlignment(Pos.CENTER);
         scorePane.setStyle("-fx-background-color: #0089b3;" +
                 "-fx-border-color: #ffffff;");
-        shipLabel = new Label(BoardContainer.getInstance().getPlayerShipsCount(false) + "/" + BoardContainer.getInstance().getMaxShipsCount());
+        shipLabel = new Label(boardContainer.getPlayerShipsCount(false) + "/" + boardContainer.getMaxShipsCount());
         Label shipQty = new Label("SHIPS: ");
         startGameButton = new Button("START");
         startGameButton.setOnAction(e -> {
             primaryStage.setScene(new GameScene().start());
-
         });
         startGameButton.setDisable(true);
         scorePane.setPrefSize(70, 50);
@@ -108,7 +108,7 @@ public class ShipsSetupScene implements IRefreshed {
 
     @Override
     public void refreshScore() {
-        shipLabel.setText(BoardContainer.getInstance().getPlayerShipsCount(false) + "/" + BoardContainer.getInstance().getMaxShipsCount());
-        startGameButton.setDisable(BoardContainer.getInstance().getPlayerShipsCount(false) != BoardContainer.getInstance().getMaxShipsCount());
+        shipLabel.setText(boardContainer.getPlayerShipsCount(false) + "/" + boardContainer.getMaxShipsCount());
+        startGameButton.setDisable(boardContainer.getPlayerShipsCount(false) != boardContainer.getMaxShipsCount());
     }
 }

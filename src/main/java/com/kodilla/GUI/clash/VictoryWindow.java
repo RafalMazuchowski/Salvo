@@ -1,6 +1,5 @@
 package com.kodilla.GUI.clash;
 
-import com.kodilla.GUI.main.MajorControl;
 import com.kodilla.GUI.placing.Settings;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

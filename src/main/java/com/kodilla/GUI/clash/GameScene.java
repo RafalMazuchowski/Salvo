@@ -3,7 +3,6 @@ package com.kodilla.GUI.clash;
 import com.kodilla.GUI.main.DisplayedBoard;
 import com.kodilla.GUI.main.IRefreshed;
 import com.kodilla.GUI.main.MajorControl;
-import com.kodilla.GUI.placing.Settings;
 import com.kodilla.container.BoardContainer;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -102,9 +101,9 @@ public class GameScene implements IRefreshed {
         scorePane.add(cpuDes, 0, 2);
         scorePane.add(playersShips, 1, 1);
         scorePane.add(cpuShips, 1, 2);
-        scorePane.setHalignment(describe, HPos.LEFT);
-        scorePane.setHalignment(playersShips, HPos.CENTER);
-        scorePane.setHalignment(cpuShips, HPos.CENTER);
+        GridPane.setHalignment(describe, HPos.LEFT);
+        GridPane.setHalignment(playersShips, HPos.CENTER);
+        GridPane.setHalignment(cpuShips, HPos.CENTER);
         scorePane.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         scorePane.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         scorePane.setHgap(30);
@@ -116,14 +115,12 @@ public class GameScene implements IRefreshed {
     public void refreshScore() {
         playersShips.setText(boardContainer.getComputerShipsCount(true) + "/" + boardContainer.getMaxShipsCount());
         cpuShips.setText(boardContainer.getPlayerShipsCount(true) + "/" + boardContainer.getMaxShipsCount());
-        if (boardContainer.getComputerShipsCount(true) == boardContainer.getMaxShipsCount()){
+        if (boardContainer.getComputerShipsCount(true) == boardContainer.getMaxShipsCount()) {
             VictoryWindow.display("USER WIN!");
-            System.out.println("BUUUUUUUUUUUUUUUUUUU!");
             MajorControl.close();
         }
-        if (boardContainer.getPlayerShipsCount(true) == boardContainer.getMaxShipsCount()){
+        if (boardContainer.getPlayerShipsCount(true) == boardContainer.getMaxShipsCount()) {
             VictoryWindow.display("CPU WIN!");
-            System.out.println("BUUUUUUUUUUUUUUUUUUU!");
             MajorControl.close();
         }
     }
