@@ -2,6 +2,8 @@ package com.kodilla.GUI.clash;
 
 import com.kodilla.GUI.main.DisplayedBoard;
 import com.kodilla.GUI.main.IRefreshed;
+import com.kodilla.GUI.main.MajorControl;
+import com.kodilla.GUI.placing.Settings;
 import com.kodilla.container.BoardContainer;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -115,12 +117,15 @@ public class GameScene implements IRefreshed {
         playersShips.setText(boardContainer.getComputerShipsCount(true) + "/" + boardContainer.getMaxShipsCount());
         cpuShips.setText(boardContainer.getPlayerShipsCount(true) + "/" + boardContainer.getMaxShipsCount());
         if (boardContainer.getComputerShipsCount(true) == boardContainer.getMaxShipsCount()){
-            System.out.println("USER WIN!");
+            VictoryWindow.display("USER WIN!");
+            System.out.println("BUUUUUUUUUUUUUUUUUUU!");
+            MajorControl.close();
         }
         if (boardContainer.getPlayerShipsCount(true) == boardContainer.getMaxShipsCount()){
-            System.out.println("CPU WIN!");
+            VictoryWindow.display("CPU WIN!");
+            System.out.println("BUUUUUUUUUUUUUUUUUUU!");
+            MajorControl.close();
         }
-
     }
 }
 
